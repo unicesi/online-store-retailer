@@ -2,13 +2,13 @@ package co.edu.icesi.driso.osr.ui;
 
 
 import co.edu.icesi.driso.osr.ui.views.CategoryView;
-import co.edu.icesi.driso.osr.ui.views.SignUpView;
 import co.edu.icesi.driso.osr.ui.views.ErrorView;
 import co.edu.icesi.driso.osr.ui.views.HomeView;
 import co.edu.icesi.driso.osr.ui.views.ProductView;
 import co.edu.icesi.driso.osr.ui.views.RecoveryPasswordView;
 import co.edu.icesi.driso.osr.ui.views.SearchResultsView;
 import co.edu.icesi.driso.osr.ui.views.ShoppingCartView;
+import co.edu.icesi.driso.osr.ui.views.SignUpView;
 import co.edu.icesi.driso.osr.ui.views.TermsAndConditionsView;
 
 import com.vaadin.annotations.PreserveOnRefresh;
@@ -31,7 +31,6 @@ public class Application extends UI {
 	
 	public static final String ABOUT_VIEW = "about";
 	public static Navigator navigator;
-//	public static HashMap<String, AbstractController> controllers;
 	
 	public Application(){
 		// Create a navigator to control the application views
