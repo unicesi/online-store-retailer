@@ -11,6 +11,7 @@ import co.edu.icesi.driso.osr.presenters.ProductPresenter;
 import co.edu.icesi.driso.osr.presenters.ViewComponent;
 import co.edu.icesi.driso.osr.ui.Application;
 import co.edu.icesi.driso.osr.ui.views.ProductView;
+import co.edu.icesi.driso.osr.util.OSRException;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
 
 import com.vaadin.data.Item;
@@ -34,7 +35,7 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class ProductSummary extends CustomComponent implements ViewComponent<Integer> {
+public class ProductSummary extends CustomComponent implements ViewComponent<Double> {
 
 	private static final long serialVersionUID = 1L;
 	private ProductPresenter presenter; 
@@ -55,14 +56,39 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Int
 	private final int productImageWidth = 320;
 	private final int productImagePadding = 20;
 	private final int containerBorderWidth = 2;
+	
+	private ValueChangeListener ratingListener;
 
 	public ProductSummary(int productId, boolean completeSummary) {
 		this.productId = productId;
 		this.completeSummary = completeSummary;
 
+		initialize();
 		buildMainLayout();
 		bindEvents();
 		setCompositionRoot(mainLayout);
+	}
+	
+	private void initialize(){
+		ratingListener = new ValueChangeListener() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				try {
+					presenter.onProductRating(productId, 
+							(Double) event.getProperty().getValue());
+					
+					Notification.show("You just rated this product with: " 
+							+ event.getProperty().getValue());
+					
+				} catch (OSRException e) {
+					Notification.show(
+							"Rating error", 
+							e.getMessage(), Notification.Type.ERROR_MESSAGE);
+				}
+			}
+		};
 	}
 
 	@SuppressWarnings("unchecked")
@@ -270,6 +296,10 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Int
 				"htc_one.png"
 		};
 	}
+	
+	public int getProductId(){
+		return productId;
+	}
 
 	@Override
 	public void setPresenter(Presenter presenter) {
@@ -299,6 +329,8 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Int
 					intQuantity = (Integer) quantityField.getConvertedValue();
 					
 					if(intQuantity > 0){
+						
+						presenter.onAddingToCart(productId, intQuantity);
 						Notification.show("Yay!", 
 								"This product was succesfully added to your shopping cart",
 								Notification.Type.HUMANIZED_MESSAGE);
@@ -316,26 +348,23 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Int
 			}
 		});
 		
-		ratingStars.addValueChangeListener(new ValueChangeListener() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void valueChange(ValueChangeEvent event) {
-				Notification.show("You just rated this product with: " 
-						+ event.getProperty().getValue());
-			}
-		});
+		ratingStars.addValueChangeListener(ratingListener);
 	}
 
 	@Override
 	public void reset() {
+		ratingStars.removeValueChangeListener(ratingListener);
 		ratingStars.setValue(0.0);
-		
+		ratingStars.addValueChangeListener(ratingListener);
 	}
 
 	@Override
-	public void setData(String key, Integer data) {
-		
+	public void setData(String key, Double data) {
+		if(key.equalsIgnoreCase("rating")){
+			ratingStars.removeValueChangeListener(ratingListener);
+			ratingStars.setValue(data);
+			ratingStars.addValueChangeListener(ratingListener);
+		}
 	}
 
 }

@@ -2,7 +2,7 @@ package co.edu.icesi.driso.osr.ui.components;
 
 import java.io.File;
 
-
+import co.edu.icesi.driso.osr.presenters.ProductPresenter;
 import co.edu.icesi.driso.osr.ui.views.ProductView;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
 
@@ -41,12 +41,14 @@ public class FeaturedProducts extends CustomComponent {
 		this.relatedProductId = relatedProductId;
 		this.showTopProduct = showTopProduct;
 		buildMainLayout();
+		assignPresenters();
 		setCompositionRoot(mainLayout);
 	}
 	
 	public FeaturedProducts(boolean showTopProduct) {
 		this.showTopProduct = showTopProduct;
 		buildMainLayout();
+		assignPresenters();
 		setCompositionRoot(mainLayout);
 	}
 
@@ -158,6 +160,13 @@ public class FeaturedProducts extends CustomComponent {
 		};
 		
 		return data;
+	}
+	
+	public void assignPresenters(){
+		if(showTopProduct){
+			ProductPresenter productPresenter = new ProductPresenter(topProduct);
+			productPresenter.init();
+		}
 	}
 
 }

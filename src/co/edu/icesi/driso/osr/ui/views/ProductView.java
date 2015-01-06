@@ -2,7 +2,7 @@ package co.edu.icesi.driso.osr.ui.views;
 
 import java.util.Random;
 
-
+import co.edu.icesi.driso.osr.presenters.ProductPresenter;
 import co.edu.icesi.driso.osr.ui.Application;
 import co.edu.icesi.driso.osr.ui.components.FeaturedProducts;
 import co.edu.icesi.driso.osr.ui.components.ProductSummary;
@@ -19,6 +19,9 @@ public class ProductView extends VerticalLayout implements View {
 	public static final String NAME = "product";
 	private int productId;
 	private ViewWrapper wrapper;
+	
+	private ProductSummary productSummary;
+	private FeaturedProducts relatedProducts;
 	
 	public ProductView(){
 		productId = -1;
@@ -38,7 +41,9 @@ public class ProductView extends VerticalLayout implements View {
 				Page.getCurrent()
 				.setTitle(getProductInfo(productId)[1] + " - Online Store Retailer");
 				
+				// Build the UI and assign respective presenters
 				buildUI();
+				assignPresenters();
 				
 			}else{
 				Notification.show("Unknown error", "An unknown error has occurred, please"
@@ -58,13 +63,18 @@ public class ProductView extends VerticalLayout implements View {
 	
 	public void buildUI(){
 
-		ProductSummary productSummary = new ProductSummary(productId, true);
+		productSummary = new ProductSummary(productId, true);
 		
 		// Top-selling related-products showcase
-		FeaturedProducts relatedProducts = new FeaturedProducts(false, 1);
+		relatedProducts = new FeaturedProducts(false, 1);
 		
 		wrapper = new ViewWrapper(productSummary, relatedProducts);
 		addComponent(wrapper);
+	}
+	
+	public void assignPresenters(){
+		ProductPresenter productPresenter = new ProductPresenter(productSummary);
+		productPresenter.init();
 	}
 	
 	public String[] getProductInfo(int productId){

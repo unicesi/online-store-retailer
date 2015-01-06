@@ -2,7 +2,9 @@ package co.edu.icesi.driso.osr.ui.components;
 
 import java.io.File;
 
-
+import co.edu.icesi.driso.osr.presenters.Presenter;
+import co.edu.icesi.driso.osr.presenters.SquareProductPresenter;
+import co.edu.icesi.driso.osr.presenters.ViewComponent;
 import co.edu.icesi.driso.osr.ui.views.ProductView;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
 
@@ -20,9 +22,11 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class SquaredProductSummary extends CustomComponent {
+public class SquaredProductSummary extends CustomComponent implements ViewComponent<Integer> {
 
 	private static final long serialVersionUID = 1L;
+	private SquareProductPresenter presenter;
+	
 	private VerticalLayout mainLayout;
 	private CssLayout buttonsGroup;
 	private final String[] product;
@@ -32,6 +36,7 @@ public class SquaredProductSummary extends CustomComponent {
 	public SquaredProductSummary(String[] product){
 		this.product = product;
 		buildMainLayout();
+		bindEvents();
 		setCompositionRoot(mainLayout);
 	}
 	
@@ -55,35 +60,6 @@ public class SquaredProductSummary extends CustomComponent {
 		addToCartButton = new Button("Add", FontAwesome.SHOPPING_CART);
 		addToCartButton.setStyleName("small");
 		addToCartButton.setWidth(66, Unit.PERCENTAGE);
-		
-		addToCartButton.addClickListener(new Button.ClickListener() {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				Integer intQuantity = null;
-				
-				try {
-					
-					intQuantity = (Integer) quantityField.getConvertedValue();
-					if(intQuantity > 0){
-						Notification.show("Yay!", 
-								"This product was succesfully added to your shopping cart",
-								Notification.Type.HUMANIZED_MESSAGE);
-					}else{
-						Notification.show("Oops...", 
-								"You must add at least one product", 
-								Notification.Type.ERROR_MESSAGE);
-					}
-					
-				}catch(ConversionException e){
-					Notification.show("Oops...", 
-							"Please specify a numeric value in the quantity field", 
-							Notification.Type.ERROR_MESSAGE);
-				}
-			}
-		});
 		
 		buttonsGroup.addComponent(quantityField);
 		buttonsGroup.addComponent(addToCartButton);
@@ -120,5 +96,53 @@ public class SquaredProductSummary extends CustomComponent {
 		
 		mainLayout.addComponent(lastProductPrice);
 		mainLayout.addComponent(buttonsGroup);
+	}
+	
+	@Override
+	public void bindEvents(){
+		
+		addToCartButton.addClickListener(new Button.ClickListener() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				Integer intQuantity = null;
+				try {
+					intQuantity = (Integer) quantityField.getConvertedValue();
+					if(intQuantity > 0){
+						
+						Notification.show("Yay!", 
+								"This product was succesfully added to your shopping cart",
+								Notification.Type.HUMANIZED_MESSAGE);
+					}else{
+						Notification.show("Oops...", 
+								"You must add at least one product", 
+								Notification.Type.ERROR_MESSAGE);
+					}
+				}catch(ConversionException e){
+					Notification.show("Oops...", 
+							"Please specify a numeric value in the quantity field", 
+							Notification.Type.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+	}
+
+	@Override
+	public void setPresenter(Presenter presenter) {
+		this.presenter = (SquareProductPresenter) presenter;
+	}
+
+	@Override
+	public void reset() {
+		quantityField.setValue("");
+	}
+
+	@Override
+	public void setData(String key, Integer data) {
+		if(key.equalsIgnoreCase("quantity")){
+			quantityField.setValue(String.valueOf(data));
+		}
 	}
 }
