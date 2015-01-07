@@ -1,1 +1,0 @@
-$wnd.org_driso_osr_ui_widgetset_OnlinestoreretaileruiWidgetset.runAsyncCallback2('b9(1440,1,dld);_.vc=function r0b(){tRb((!mRb&&(mRb=new yRb),mRb),this.b.e)};Efd(Vh)(2);\n//# sourceURL=org.driso.osr.ui.widgetset.OnlinestoreretaileruiWidgetset-2.js\n')
