@@ -1,11 +1,14 @@
+# Local files
 *.class
 .settings
 .project
 .classpath
 .DS_Store
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# VAADIN css theme and widget set
+WebContent/VAADIN/themes/onlinestoreretailer/styles.css
+WebContent/VAADIN/widgetsets/
+src/co/edu/icesi/driso/osr/ui/widgetset/
 
 # Package Files #
 *.war
