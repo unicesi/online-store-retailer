@@ -10,6 +10,8 @@ import org.vaadin.pagingcomponent.button.ButtonPageNavigator;
 import org.vaadin.pagingcomponent.customizer.style.StyleCustomizer;
 import org.vaadin.pagingcomponent.listener.impl.LazyPagingComponentListener;
 
+import co.edu.icesi.driso.osr.presenters.SquaredProductPresenter;
+
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomComponent;
@@ -110,8 +112,10 @@ public class ProductGrid extends CustomComponent {
 			}
 		};
 		
-		paginationBar = new PagingComponent<String[]>(productsPerPage, buttonsPerPage, products, 
-				paginationStyle, new LazyPagingComponentListener<String[]>(productsLayout) {
+		paginationBar = 
+				new PagingComponent<String[]>(productsPerPage, buttonsPerPage, products, 
+						paginationStyle, 
+						new LazyPagingComponentListener<String[]>(productsLayout) {
 
 			private static final long serialVersionUID = 1L;
 
@@ -122,7 +126,14 @@ public class ProductGrid extends CustomComponent {
 
 			@Override
 			protected Component displayItem(int index, String[] item) {
-				return new SquaredProductSummary(item);
+				SquaredProductSummary productSummary = 
+						new SquaredProductSummary(item);
+				
+				SquaredProductPresenter productPresenter = 
+						new SquaredProductPresenter(productSummary);
+				productPresenter.init();
+				
+				return productSummary;
 			}
 		});
 		
