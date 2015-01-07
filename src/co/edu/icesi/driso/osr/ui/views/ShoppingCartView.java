@@ -38,7 +38,7 @@ public class ShoppingCartView extends VerticalLayout implements View, ViewCompon
 		// Layout configuration
 		initProductsLayout();
 		
-		// Check out button
+		// CheckOut button
 		checkOutButton = new Button("Check Out", FontAwesome.CHECK_SQUARE_O);
 		
 		wrapper = new ViewWrapper(productsLayout);
