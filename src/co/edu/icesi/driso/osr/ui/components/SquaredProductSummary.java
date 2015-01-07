@@ -3,7 +3,7 @@ package co.edu.icesi.driso.osr.ui.components;
 import java.io.File;
 
 import co.edu.icesi.driso.osr.presenters.Presenter;
-import co.edu.icesi.driso.osr.presenters.SquareProductPresenter;
+import co.edu.icesi.driso.osr.presenters.SquaredProductPresenter;
 import co.edu.icesi.driso.osr.presenters.ViewComponent;
 import co.edu.icesi.driso.osr.ui.views.ProductView;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
@@ -25,7 +25,7 @@ import com.vaadin.ui.VerticalLayout;
 public class SquaredProductSummary extends CustomComponent implements ViewComponent<Integer> {
 
 	private static final long serialVersionUID = 1L;
-	private SquareProductPresenter presenter;
+	private SquaredProductPresenter presenter;
 	
 	private VerticalLayout mainLayout;
 	private CssLayout buttonsGroup;
@@ -111,6 +111,7 @@ public class SquaredProductSummary extends CustomComponent implements ViewCompon
 					intQuantity = (Integer) quantityField.getConvertedValue();
 					if(intQuantity > 0){
 						
+						presenter.onAddingToCart(Integer.parseInt(product[0]), intQuantity);
 						Notification.show("Yay!", 
 								"This product was succesfully added to your shopping cart",
 								Notification.Type.HUMANIZED_MESSAGE);
@@ -131,7 +132,7 @@ public class SquaredProductSummary extends CustomComponent implements ViewCompon
 
 	@Override
 	public void setPresenter(Presenter presenter) {
-		this.presenter = (SquareProductPresenter) presenter;
+		this.presenter = (SquaredProductPresenter) presenter;
 	}
 
 	@Override
