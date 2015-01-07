@@ -10,26 +10,31 @@ import co.edu.icesi.driso.osr.util.OSRUtilities;
 import com.vaadin.data.util.converter.Converter.ConversionException;
 import com.vaadin.server.FileResource;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.VerticalLayout;
 
 public class ShoppingCartProductSummary extends CustomComponent implements ViewComponent<Integer> {
 	
 	private static final long serialVersionUID = 1L;
 	private ShoppingCartProductPresenter presenter;
 	
-	private HorizontalLayout mainLayout;
 	private final String[] product;
+	private HorizontalLayout mainLayout;
+	private VerticalLayout actionsLayout;
 	private CssLayout quantityLayout;
 	private TextField quantityField;
 	private Button updateQuantityButton;
 	private Button deleteButton;
+	private Label productPrice;
 	
 	
 	public ShoppingCartProductSummary(String[] product){
@@ -43,8 +48,11 @@ public class ShoppingCartProductSummary extends CustomComponent implements ViewC
 	public void buildMainLayout(){
 		// Layout configuration
 		mainLayout = new HorizontalLayout();
-		mainLayout.setWidth(90, Unit.PERCENTAGE);
-		mainLayout.setStyleName("margin-centered");
+		mainLayout.setWidth(50, Unit.PERCENTAGE);
+		mainLayout.setStyleName("shopping-cart-product right");
+		
+		actionsLayout = new VerticalLayout();
+		actionsLayout.setSpacing(true);
 		
 		quantityLayout = new CssLayout();
 		quantityLayout.setStyleName("v-component-group");
@@ -52,12 +60,14 @@ public class ShoppingCartProductSummary extends CustomComponent implements ViewC
 		// Product image
 		FileResource imageResource = new FileResource(new File(
 				OSRUtilities.getRealPathFor("/WEB-INF/images/thumbnails/"
-						+ product[2])));
+						+ product[5])));
 		Image productImage = new Image(null, imageResource);
+		productImage.setStyleName("shopping-cart-product-image");
 		
 		// Quantity field and refresh button
-		quantityField = new TextField("Quantity");
+		quantityField = new TextField();
 		quantityField.setStyleName("small");
+		quantityField.setWidth(51, Unit.PIXELS);
 		quantityField.setMaxLength(3);
 		quantityField.setConverter(Integer.class);
 		quantityField.setConversionError(
@@ -68,15 +78,25 @@ public class ShoppingCartProductSummary extends CustomComponent implements ViewC
 		
 		quantityLayout.addComponent(quantityField);
 		quantityLayout.addComponent(updateQuantityButton);
+		actionsLayout.addComponent(quantityLayout);
+		
+		// Product price label
+		String price = OSRUtilities.formatCurrency(product[3]);
+		if(!product[3].equals(product[4])){
+			price += "<br /><strike>" + OSRUtilities.formatCurrency(product[4]) 
+				  + "</strike>";
+		}
+		productPrice = new Label(price, ContentMode.HTML);
 		
 		// Delete button
 		deleteButton = new Button("Remove", FontAwesome.TRASH_O);
 		deleteButton.setStyleName("small");
+		actionsLayout.addComponent(deleteButton);
 		
 		// Main layout components
 		mainLayout.addComponent(productImage);
-		mainLayout.addComponent(quantityLayout);
-		mainLayout.addComponent(deleteButton);
+		mainLayout.addComponent(productPrice);
+		mainLayout.addComponent(actionsLayout);
 	}
 	
 	public String[] getProduct(){
@@ -100,8 +120,7 @@ public class ShoppingCartProductSummary extends CustomComponent implements ViewC
 					intQuantity = (Integer) quantityField.getConvertedValue();
 					if (intQuantity > 0) {
 						
-						presenter.onQuantityChange(Integer.parseInt(product[0]),
-								intQuantity);
+						presenter.onQuantityChange(product, intQuantity);
 						Notification
 								.show("Yay!",
 										"This product was succesfully updated",
@@ -125,7 +144,7 @@ public class ShoppingCartProductSummary extends CustomComponent implements ViewC
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				
+				presenter.onRemovingProduct(product);
 			}
 		});
 	}

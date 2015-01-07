@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.vaadin.server.VaadinService;
 
@@ -77,6 +78,26 @@ public class OSRUtilities {
 			item = item.substring(0, item.length() - 1);
 
 		return item;
+	}
+	
+	public static String[] getProductInformation(int productId){
+		Random gen = new Random();
+		String v = gen.nextBoolean() ? "545000" : "599000";
+		return new String[]{
+/* 0 */			productId + "",
+/* 1 */			"Sony Xperia Z3", 
+/* 2 */			"It’s the details that make the difference " +
+				"between a good smartphone and a great one. " +
+				"Our premium Xperia™ smartphones and tablets " +
+				"bring together the best of Sony technologies, " +
+				"crafted using the finest quality materials in " +
+				"a waterproof body, for a design that can " +
+				"withstand the test of time. So don’t settle " +
+				"for good when you can have great.", 
+/* 3 */			"545000",
+/* 4 */			v,
+/* 5 */			"htc_one.png"
+		};
 	}
 
 }

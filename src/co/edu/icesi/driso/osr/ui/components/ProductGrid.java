@@ -11,6 +11,7 @@ import org.vaadin.pagingcomponent.customizer.style.StyleCustomizer;
 import org.vaadin.pagingcomponent.listener.impl.LazyPagingComponentListener;
 
 import co.edu.icesi.driso.osr.presenters.SquaredProductPresenter;
+import co.edu.icesi.driso.osr.ui.Application;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Component;
@@ -130,7 +131,8 @@ public class ProductGrid extends CustomComponent {
 						new SquaredProductSummary(item);
 				
 				SquaredProductPresenter productPresenter = 
-						new SquaredProductPresenter(productSummary);
+						new SquaredProductPresenter(productSummary, 
+								Application.shoppingCartPresenter);
 				productPresenter.init();
 				
 				return productSummary;

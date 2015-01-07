@@ -25,7 +25,8 @@ import com.vaadin.ui.UI;
 public class Application extends UI {
 	
 	private static final long serialVersionUID = 1L;
-	
+	public static ShoppingCartPresenter shoppingCartPresenter;
+
 	// page width configuration
 	public static final int pageWidth = 960;
 	public static final Unit pageWidthUnit = Unit.PIXELS;
@@ -39,7 +40,7 @@ public class Application extends UI {
 		navigator.setErrorView(new ErrorView());
 		
 		ShoppingCartView shoppingCartView = new ShoppingCartView();
-		ShoppingCartPresenter shoppingCartPresenter = new ShoppingCartPresenter(shoppingCartView);
+		shoppingCartPresenter = new ShoppingCartPresenter(shoppingCartView);
 		shoppingCartPresenter.init();
 		
 		// Create and register the application views

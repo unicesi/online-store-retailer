@@ -3,6 +3,7 @@ package co.edu.icesi.driso.osr.ui.components;
 import java.io.File;
 
 import co.edu.icesi.driso.osr.presenters.ProductPresenter;
+import co.edu.icesi.driso.osr.ui.Application;
 import co.edu.icesi.driso.osr.ui.views.ProductView;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
 
@@ -62,7 +63,7 @@ public class FeaturedProducts extends CustomComponent {
 		
 		// Show top product
 		if(showTopProduct)
-			topProduct = new ProductSummary(1, false);
+			topProduct = new ProductSummary(OSRUtilities.getProductInformation(1), false);
 		
 		// Add a title in case the featured products correspond to related products
 		if(relatedProductId > -1){
@@ -164,7 +165,10 @@ public class FeaturedProducts extends CustomComponent {
 	
 	public void assignPresenters(){
 		if(showTopProduct){
-			ProductPresenter productPresenter = new ProductPresenter(topProduct);
+			ProductPresenter productPresenter = 
+					new ProductPresenter(topProduct, 
+							Application.shoppingCartPresenter);
+			
 			productPresenter.init();
 		}
 	}

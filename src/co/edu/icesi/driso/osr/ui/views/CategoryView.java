@@ -2,10 +2,9 @@ package co.edu.icesi.driso.osr.ui.views;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 
 import co.edu.icesi.driso.osr.ui.components.ProductGrid;
+import co.edu.icesi.driso.osr.util.OSRUtilities;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -70,18 +69,6 @@ public class CategoryView extends VerticalLayout implements View {
 		addComponent(wrapper);
 	}
 
-	public String[] getProductInfo(int productId){
-		Random gen = new Random();
-		String v = gen.nextBoolean() ? "11000" : "10000";
-		return new String[]{
-				"1",
-				"Shampoo Redken",
-				"htc_one.png",
-				"11000",
-				v
-		};
-	}
-
 	public String[] getCategoryInfo(int categoryId){
 		return new String[]{
 				"" + categoryId,
@@ -93,7 +80,7 @@ public class CategoryView extends VerticalLayout implements View {
 		List<String[]> products = new ArrayList<String[]>();
 		
 		for (int i = 0; i < n; i++) {
-			String[] tempProduct = getProductInfo(i);
+			String[] tempProduct = OSRUtilities.getProductInformation(i);
 			products.add(tempProduct);
 		}
 		

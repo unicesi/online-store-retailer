@@ -29,6 +29,31 @@ $v-selection-item-border-radius: 0;
 @mixin onlinestoreretailer {
 	@include valo;
 	
+	/* SHOPPING CART */
+	
+	.shopping-cart h1 {
+		margin-bottom: 35px !important;
+	}
+	
+	.shopping-cart hr {
+		border: 1px solid #444;
+	}
+	
+	.shopping-cart-product {
+		margin-bottom: 8px;
+	}
+	
+	.shopping-cart-product .v-slot {
+		display: table-cell;
+		padding: 0 15px;
+    	vertical-align: middle;
+	}
+	
+	.shopping-cart-product-image {
+		height: auto;
+		width: 140px;
+	}
+	
 	/* PAGINATION */
 	
 	.pagination {

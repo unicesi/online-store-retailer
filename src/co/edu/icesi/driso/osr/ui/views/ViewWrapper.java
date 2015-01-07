@@ -13,6 +13,7 @@ import com.vaadin.ui.VerticalLayout;
 public class ViewWrapper extends VerticalLayout {
 
 	private static final long serialVersionUID = 1L;
+	private VerticalLayout container;
 	private final AbstractComponent[] components;
 	
 	public ViewWrapper(AbstractComponent ... components){
@@ -24,7 +25,7 @@ public class ViewWrapper extends VerticalLayout {
 		TopBar topBar = new TopBar();
 		this.addComponent(topBar);
 		
-		VerticalLayout container = new VerticalLayout();
+		container = new VerticalLayout();
 		container.setMargin(false);
 		container.setSpacing(false);
 		container.setWidth(Application.pageWidth, Application.pageWidthUnit);
@@ -42,6 +43,12 @@ public class ViewWrapper extends VerticalLayout {
 		
 		Footer footer = new Footer();
 		this.addComponent(footer);
+	}
+	
+	public void replaceComponent(AbstractComponent oldComponent, 
+			AbstractComponent newComponent){
+		
+		container.replaceComponent(oldComponent, newComponent);
 	}
 
 }

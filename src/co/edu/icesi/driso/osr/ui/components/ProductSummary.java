@@ -39,13 +39,13 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 
 	private static final long serialVersionUID = 1L;
 	private ProductPresenter presenter; 
+	private final String[] product;
 	
 	private CssLayout mainLayout;
 	private VerticalLayout informationLayout;
 	private CssLayout bottomOptionsLayout;
 	private CssLayout linksLayout;
 	
-	private final int productId;
 	private final boolean completeSummary;
 	private Button seeProductButton;
 	private CssLayout buttonsGroup;
@@ -59,8 +59,8 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 	
 	private ValueChangeListener ratingListener;
 
-	public ProductSummary(int productId, boolean completeSummary) {
-		this.productId = productId;
+	public ProductSummary(String[] product, boolean completeSummary) {
+		this.product = product;
 		this.completeSummary = completeSummary;
 
 		initialize();
@@ -76,7 +76,7 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				try {
-					presenter.onProductRating(productId, 
+					presenter.onProductRating(product, 
 							(Double) event.getProperty().getValue());
 					
 					Notification.show("You just rated this product with: " 
@@ -118,33 +118,33 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 		linksLayout.setStyleName("v-component-group");
 
 		// Product's data: name, description, image
-		String[] productData = getProductInformation(productId);
+		String[] productData = OSRUtilities.getProductInformation(Integer.parseInt(product[0]));
 
 		// Product's image
 		FileResource imageFile = 
 				new FileResource(
 						new File(OSRUtilities.getRealPathFor("/WEB-INF/images/products/" 
-								+ productData[4])));
+								+ productData[5])));
 		Image productImage = new Image(null, imageFile);
-		productImage.setAlternateText(productData[0]);
+		productImage.setAlternateText(productData[1]);
 		productImage.setWidth(calculatedProductImageWidth, Unit.PIXELS);
 
 		// Product's data
 		Label productName = 
-				new Label("<a href=\"#!" + ProductView.NAME + "/" + productId + 
-						"\"><h2>" + productData[0] + "</h2></a>", ContentMode.HTML);
+				new Label("<a href=\"#!" + ProductView.NAME + "/" + product[0] + 
+						"\"><h2>" + productData[1] + "</h2></a>", ContentMode.HTML);
 		informationLayout.addComponent(productName);
 
 		Label productDescription = 
-				new Label("<p>" + productData[1] + "</p>", ContentMode.HTML);
+				new Label("<p>" + productData[2] + "</p>", ContentMode.HTML);
 		informationLayout.addComponent(productDescription);
 		
-		String productPriceStr = "<p>Price: " + OSRUtilities.formatCurrency(productData[2]);
+		String productPriceStr = "<p>Price: " + OSRUtilities.formatCurrency(productData[3]);
 		
-		if(!productData[2].equals(productData[3])){
+		if(!productData[3].equals(productData[4])){
 			productPriceStr += "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 							+ "&nbsp;&nbsp;&nbsp;<strike>" 
-							+ OSRUtilities.formatCurrency(productData[3]) 
+							+ OSRUtilities.formatCurrency(productData[4])
 							+ "</strike></p>";
 		}else{
 			productPriceStr += "</p>";
@@ -279,26 +279,9 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 		
 		return commentLayout;
 	}
-
-	private String[] getProductInformation(int productId){
-		return new String[]{
-				"Sony Xperia Z3", 
-				"It’s the details that make the difference " +
-				"between a good smartphone and a great one. " +
-				"Our premium Xperia™ smartphones and tablets " +
-				"bring together the best of Sony technologies, " +
-				"crafted using the finest quality materials in " +
-				"a waterproof body, for a design that can " +
-				"withstand the test of time. So don’t settle " +
-				"for good when you can have great.", 
-				"545000",
-				"599000",
-				"htc_one.png"
-		};
-	}
 	
-	public int getProductId(){
-		return productId;
+	public String[] getProduct(){
+		return product;
 	}
 
 	@Override
@@ -314,7 +297,7 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				Application.navigator.navigateTo(ProductView.NAME + "/" + productId);
+				Application.navigator.navigateTo(ProductView.NAME + "/" + product[0]);
 			}
 		});
 		
@@ -330,7 +313,7 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 					
 					if(intQuantity > 0){
 						
-						presenter.onAddingToCart(productId, intQuantity);
+						presenter.onAddingToCart(product, intQuantity);
 						Notification.show("Yay!", 
 								"This product was succesfully added to your shopping cart",
 								Notification.Type.HUMANIZED_MESSAGE);

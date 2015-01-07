@@ -5,19 +5,31 @@ import co.edu.icesi.driso.osr.util.OSRException;
 
 public class ProductPresenter implements Presenter {
 	
-	private final ProductSummary viewComponent;
-	
-	public ProductPresenter(ProductSummary viewComponent){
-		this.viewComponent = viewComponent;
+	public interface Collaborator {
+		
+		public void onAddingToCart(String[] product, int quantity);
 	}
 	
-	public void onAddingToCart(int productId, int quantity) {
+	private final ProductSummary viewComponent;
+	private final Collaborator[] collaborators;
+	
+	public ProductPresenter(ProductSummary viewComponent, 
+			Collaborator ... collaborators){
+		this.viewComponent = viewComponent;
+		this.collaborators = collaborators;
+	}
+	
+	public void onAddingToCart(String[] product, int quantity) {
 		// TODO
 		// Perform the adding process
 		// ...
+
+		for (int i = 0; i < collaborators.length; i++) {
+			collaborators[i].onAddingToCart(product, quantity);
+		}
 	}
 	
-	public void onProductRating(int productId, double ratingValue) throws OSRException {
+	public void onProductRating(String[] product, double ratingValue) throws OSRException {
 		// TODO
 		// Perform the rating process
 		// ...

@@ -4,16 +4,28 @@ import co.edu.icesi.driso.osr.ui.components.SquaredProductSummary;
 
 public class SquaredProductPresenter implements Presenter {
 	
-	private SquaredProductSummary viewComponent;
-
-	public SquaredProductPresenter(SquaredProductSummary viewComponent) {
-		this.viewComponent = viewComponent;
+	public interface Collaborator {
+		public void onAddingToCart(String[] product, int quantity);
 	}
 	
-	public void onAddingToCart(int productId, int quantity) {
+	private final SquaredProductSummary viewComponent;
+	private final Collaborator[] collaborators;
+
+	public SquaredProductPresenter(SquaredProductSummary viewComponent, 
+			Collaborator ... collaborators) {
+		
+		this.viewComponent = viewComponent;
+		this.collaborators = collaborators;
+	}
+	
+	public void onAddingToCart(String[] product, int quantity) {
 		// TODO
 		// Perform the adding process
 		// ...
+		
+		for (int i = 0; i < collaborators.length; i++) {
+			collaborators[i].onAddingToCart(product, quantity);
+		}
 	}
 
 	@Override

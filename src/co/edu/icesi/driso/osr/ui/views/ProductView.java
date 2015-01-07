@@ -1,11 +1,10 @@
 package co.edu.icesi.driso.osr.ui.views;
 
-import java.util.Random;
-
 import co.edu.icesi.driso.osr.presenters.ProductPresenter;
 import co.edu.icesi.driso.osr.ui.Application;
 import co.edu.icesi.driso.osr.ui.components.FeaturedProducts;
 import co.edu.icesi.driso.osr.ui.components.ProductSummary;
+import co.edu.icesi.driso.osr.util.OSRUtilities;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -39,7 +38,7 @@ public class ProductView extends VerticalLayout implements View {
 				productId = Integer.parseInt(vars[0]);
 				
 				Page.getCurrent()
-				.setTitle(getProductInfo(productId)[1] + " - Online Store Retailer");
+				.setTitle(OSRUtilities.getProductInformation(productId)[1] + " - Online Store Retailer");
 				
 				// Build the UI and assign respective presenters
 				buildUI();
@@ -63,7 +62,7 @@ public class ProductView extends VerticalLayout implements View {
 	
 	public void buildUI(){
 
-		productSummary = new ProductSummary(productId, true);
+		productSummary = new ProductSummary(OSRUtilities.getProductInformation(1), true);
 		
 		// Top-selling related-products showcase
 		relatedProducts = new FeaturedProducts(false, 1);
@@ -73,20 +72,11 @@ public class ProductView extends VerticalLayout implements View {
 	}
 	
 	public void assignPresenters(){
-		ProductPresenter productPresenter = new ProductPresenter(productSummary);
+		ProductPresenter productPresenter = 
+				new ProductPresenter(productSummary, 
+						Application.shoppingCartPresenter);
+		
 		productPresenter.init();
-	}
-	
-	public String[] getProductInfo(int productId){
-		Random gen = new Random();
-		String v = gen.nextBoolean() ? "11000" : "10000";
-		return new String[]{
-				"1",
-				"Shampoo Redken",
-				"htc_one.png",
-				"11000",
-				v
-		};
 	}
 
 }

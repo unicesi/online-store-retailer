@@ -70,17 +70,17 @@ public class SquaredProductSummary extends CustomComponent implements
 				ContentMode.HTML);
 
 		Label productPrice = new Label("<h3>"
-				+ OSRUtilities.formatCurrency(product[4]) + "</h3>",
+				+ OSRUtilities.formatCurrency(product[3]) + "</h3>",
 				ContentMode.HTML);
 
 		Label lastProductPrice = new Label(
 				"<span class=\"prev-price\"><strike>"
-						+ OSRUtilities.formatCurrency(product[3])
+						+ OSRUtilities.formatCurrency(product[4])
 						+ "</strike></span>", ContentMode.HTML);
 
 		FileResource imageResource = new FileResource(new File(
 				OSRUtilities.getRealPathFor("/WEB-INF/images/thumbnails/"
-						+ product[2])));
+						+ product[5])));
 		Image productImage = new Image(null, imageResource);
 
 		mainLayout.addComponent(productImage);
@@ -112,7 +112,7 @@ public class SquaredProductSummary extends CustomComponent implements
 					intQuantity = (Integer) quantityField.getConvertedValue();
 					if (intQuantity > 0) {
 
-						presenter.onAddingToCart(Integer.parseInt(product[0]),
+						presenter.onAddingToCart(product,
 								intQuantity);
 						Notification
 								.show("Yay!",
