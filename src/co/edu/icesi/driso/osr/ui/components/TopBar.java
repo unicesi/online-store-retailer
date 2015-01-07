@@ -1,11 +1,12 @@
 package co.edu.icesi.driso.osr.ui.components;
 
 
-import co.edu.icesi.driso.osr.presenters.SignInPresenter;
 import co.edu.icesi.driso.osr.presenters.SearchPresenter;
+import co.edu.icesi.driso.osr.presenters.SignInPresenter;
 import co.edu.icesi.driso.osr.ui.Application;
-import co.edu.icesi.driso.osr.ui.views.SignUpView;
 import co.edu.icesi.driso.osr.ui.views.HomeView;
+import co.edu.icesi.driso.osr.ui.views.ShoppingCartView;
+import co.edu.icesi.driso.osr.ui.views.SignUpView;
 
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FontAwesome;
@@ -122,6 +123,14 @@ public class TopBar extends CustomComponent {
 	}
 	
 	private void bindEvents(){
+		shoppingCart.addClickListener(new Button.ClickListener() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				Application.navigator.navigateTo(ShoppingCartView.NAME);
+			}
+		});
 		
 		signup.addClickListener(new Button.ClickListener() {
 			private static final long serialVersionUID = 1L;
@@ -131,7 +140,6 @@ public class TopBar extends CustomComponent {
 				Application.navigator.navigateTo(SignUpView.NAME);
 			}
 		});
-		
 	}
 
 }

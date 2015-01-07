@@ -1,6 +1,7 @@
 package co.edu.icesi.driso.osr.ui;
 
 
+import co.edu.icesi.driso.osr.presenters.ShoppingCartPresenter;
 import co.edu.icesi.driso.osr.ui.views.CategoryView;
 import co.edu.icesi.driso.osr.ui.views.ErrorView;
 import co.edu.icesi.driso.osr.ui.views.HomeView;
@@ -37,6 +38,10 @@ public class Application extends UI {
 		navigator = new Navigator(this, this);
 		navigator.setErrorView(new ErrorView());
 		
+		ShoppingCartView shoppingCartView = new ShoppingCartView();
+		ShoppingCartPresenter shoppingCartPresenter = new ShoppingCartPresenter(shoppingCartView);
+		shoppingCartPresenter.init();
+		
 		// Create and register the application views
 		// To create a new instance each time: navigator.addView(CountView.NAME, CountView.class);
 		navigator.addView("", new HomeView());
@@ -46,7 +51,7 @@ public class Application extends UI {
 		navigator.addView(CategoryView.NAME, new CategoryView());
 		navigator.addView(ProductView.NAME, ProductView.class);
 		navigator.addView(TermsAndConditionsView.NAME, TermsAndConditionsView.class);
-		navigator.addView(ShoppingCartView.NAME, ShoppingCartView.class);
+		navigator.addView(ShoppingCartView.NAME, shoppingCartView);
 		navigator.addView(SearchResultsView.NAME, SearchResultsView.class);
 	}
 
