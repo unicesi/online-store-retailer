@@ -1,12 +1,13 @@
 package co.edu.icesi.driso.osr.ui.components;
 
-
 import co.edu.icesi.driso.osr.presenters.SearchPresenter;
+import co.edu.icesi.driso.osr.presenters.ShoppingCartPresenter;
 import co.edu.icesi.driso.osr.presenters.SignInPresenter;
 import co.edu.icesi.driso.osr.ui.Application;
 import co.edu.icesi.driso.osr.ui.views.HomeView;
 import co.edu.icesi.driso.osr.ui.views.ShoppingCartView;
 import co.edu.icesi.driso.osr.ui.views.SignUpView;
+import co.edu.icesi.driso.osr.util.OSRUtilities;
 
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FontAwesome;
@@ -20,7 +21,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.PopupView;
 
-public class TopBar extends CustomComponent {
+public class TopBar extends CustomComponent implements ShoppingCartPresenter.Collaborator {
 
 	private static final long serialVersionUID = 1L;
 	private HorizontalLayout wrapper;
@@ -85,7 +86,7 @@ public class TopBar extends CustomComponent {
 		shoppingCart.setStyleName("v-menubar-menuitem-icon-only");
 		shoppingCartLayout.addComponent(shoppingCart);
 		
-		checkOut = new Button("$52.000");
+		checkOut = new Button("");
 		checkOut.setEnabled(false);
 		shoppingCartLayout.addComponent(checkOut);
 				
@@ -140,6 +141,11 @@ public class TopBar extends CustomComponent {
 				Application.navigator.navigateTo(SignUpView.NAME);
 			}
 		});
+	}
+
+	@Override
+	public void onShoppingCartUpdated(double totalToPay) {
+		checkOut.setCaption(OSRUtilities.formatCurrency(String.valueOf(totalToPay)));
 	}
 
 }

@@ -32,6 +32,7 @@ public class ShoppingCartView extends VerticalLayout implements View, ViewCompon
 	
 	public ShoppingCartView(){
 		buildUI();
+		bindEvents();
 	}
 
 	@Override
@@ -109,7 +110,7 @@ public class ShoppingCartView extends VerticalLayout implements View, ViewCompon
 			initProductsLayout();
 		}else{
 			productsLayout.addComponent(
-					new Label("<br /><p>This cart is empty  :(</p><br />", 
+					new Label("<br /><p>This shopping cart is empty</p><br />", 
 							ContentMode.HTML));
 		}
 	}
@@ -123,7 +124,7 @@ public class ShoppingCartView extends VerticalLayout implements View, ViewCompon
 			
 			String total = (String) data;
 			Label oldTotalToPayLabel = totalToPayLabel;
-			totalToPayLabel = new Label(OSRUtilities.formatCurrency(total));
+			totalToPayLabel = new Label("Total: " + OSRUtilities.formatCurrency(total));
 			
 			productsLayout.replaceComponent(oldTotalToPayLabel, totalToPayLabel);
 		}
