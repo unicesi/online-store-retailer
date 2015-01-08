@@ -2,12 +2,13 @@ package co.edu.icesi.driso.osr.presenters;
 
 import co.edu.icesi.driso.osr.ui.components.ProductSummary;
 import co.edu.icesi.driso.osr.util.OSRException;
+import co.edu.icesi.osr.dtos.ProductoDTO;
 
 public class ProductPresenter implements Presenter {
 	
 	public interface Collaborator {
 		
-		public void onAddingToCart(String[] product, int quantity);
+		public void onAddingToCart(ProductoDTO product, int quantity);
 	}
 	
 	private final ProductSummary viewComponent;
@@ -19,7 +20,7 @@ public class ProductPresenter implements Presenter {
 		this.collaborators = collaborators;
 	}
 	
-	public void onAddingToCart(String[] product, int quantity) {
+	public void onAddingToCart(ProductoDTO product, int quantity) {
 		// TODO
 		// Perform the adding process
 		// ...
@@ -29,7 +30,7 @@ public class ProductPresenter implements Presenter {
 		}
 	}
 	
-	public void onProductRating(String[] product, double ratingValue) throws OSRException {
+	public void onProductRating(ProductoDTO product, double ratingValue) throws OSRException {
 		// TODO
 		// Perform the rating process
 		// ...

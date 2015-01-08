@@ -5,6 +5,7 @@ import java.util.List;
 
 import co.edu.icesi.driso.osr.ui.components.ProductGrid;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
+import co.edu.icesi.osr.dtos.ProductoDTO;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -59,7 +60,7 @@ public class CategoryView extends VerticalLayout implements View {
 		titleLabel = new Label("<h1>" + getCategoryInfo(categoryId)[1] + "</h1>", ContentMode.HTML);
 		
 		// Product grid
-		List<String[]> products = getElements(100);
+		List<ProductoDTO> products = getElements(100);
 		ProductGrid productGrid = new ProductGrid(products, 8, 4);
 		
 		contentLayout.addComponent(titleLabel);
@@ -76,11 +77,11 @@ public class CategoryView extends VerticalLayout implements View {
 		};
 	}
 
-	public List<String[]> getElements(int n) {
-		List<String[]> products = new ArrayList<String[]>();
+	public List<ProductoDTO> getElements(int n) {
+		List<ProductoDTO> products = new ArrayList<ProductoDTO>();
 		
 		for (int i = 0; i < n; i++) {
-			String[] tempProduct = OSRUtilities.getProductInformation(i);
+			ProductoDTO tempProduct = OSRUtilities.getDummyProduct(i);
 			products.add(tempProduct);
 		}
 		

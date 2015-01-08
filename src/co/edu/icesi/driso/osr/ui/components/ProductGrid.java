@@ -12,6 +12,7 @@ import org.vaadin.pagingcomponent.listener.impl.LazyPagingComponentListener;
 
 import co.edu.icesi.driso.osr.presenters.SquaredProductPresenter;
 import co.edu.icesi.driso.osr.ui.Application;
+import co.edu.icesi.osr.dtos.ProductoDTO;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Component;
@@ -24,13 +25,13 @@ public class ProductGrid extends CustomComponent {
 	private static final long serialVersionUID = 1L;
 	private VerticalLayout mainLayout;
 	private GridLayout productsLayout;
-	private final List<String[]> products;
+	private final List<ProductoDTO> products;
 	private final int productsPerPage;
 	private final int productsPerRow;
 	private final int buttonsPerPage;
-	private PagingComponent<String[]> paginationBar;
+	private PagingComponent<ProductoDTO> paginationBar;
 	
-	public ProductGrid(List<String[]> products,	int productsPerPage, int productsByRow){
+	public ProductGrid(List<ProductoDTO> products,	int productsPerPage, int productsByRow){
 		this.products = products;
 		this.productsPerPage = productsPerPage;
 		this.productsPerRow = productsByRow;
@@ -114,19 +115,19 @@ public class ProductGrid extends CustomComponent {
 		};
 		
 		paginationBar = 
-				new PagingComponent<String[]>(productsPerPage, buttonsPerPage, products, 
+				new PagingComponent<ProductoDTO>(productsPerPage, buttonsPerPage, products, 
 						paginationStyle, 
-						new LazyPagingComponentListener<String[]>(productsLayout) {
+						new LazyPagingComponentListener<ProductoDTO>(productsLayout) {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected Collection<String[]> getItemsList(int startIndex, int endIndex) {
+			protected Collection<ProductoDTO> getItemsList(int startIndex, int endIndex) {
 				return products.subList(startIndex, endIndex);
 			}
 
 			@Override
-			protected Component displayItem(int index, String[] item) {
+			protected Component displayItem(int index, ProductoDTO item) {
 				SquaredProductSummary productSummary = 
 						new SquaredProductSummary(item);
 				

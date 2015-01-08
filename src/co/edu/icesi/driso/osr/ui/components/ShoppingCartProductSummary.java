@@ -6,6 +6,7 @@ import co.edu.icesi.driso.osr.presenters.Presenter;
 import co.edu.icesi.driso.osr.presenters.ShoppingCartProductPresenter;
 import co.edu.icesi.driso.osr.presenters.ViewComponent;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
+import co.edu.icesi.osr.dtos.ProductoDTO;
 
 import com.vaadin.data.util.converter.Converter.ConversionException;
 import com.vaadin.server.FileResource;
@@ -27,7 +28,7 @@ public class ShoppingCartProductSummary extends CustomComponent implements ViewC
 	private static final long serialVersionUID = 1L;
 	private ShoppingCartProductPresenter presenter;
 	
-	private final String[] product;
+	private final ProductoDTO product;
 	private HorizontalLayout mainLayout;
 	private VerticalLayout actionsLayout;
 	private CssLayout quantityLayout;
@@ -37,7 +38,7 @@ public class ShoppingCartProductSummary extends CustomComponent implements ViewC
 	private Label productPrice;
 	
 	
-	public ShoppingCartProductSummary(String[] product){
+	public ShoppingCartProductSummary(ProductoDTO product){
 		this.product = product;
 		
 		buildMainLayout();
@@ -60,7 +61,7 @@ public class ShoppingCartProductSummary extends CustomComponent implements ViewC
 		// Product image
 		FileResource imageResource = new FileResource(new File(
 				OSRUtilities.getRealPathFor("/WEB-INF/images/thumbnails/"
-						+ product[5])));
+						+ product.getImageName())));
 		Image productImage = new Image(null, imageResource);
 		productImage.setStyleName("shopping-cart-product-image");
 		
@@ -81,10 +82,11 @@ public class ShoppingCartProductSummary extends CustomComponent implements ViewC
 		actionsLayout.addComponent(quantityLayout);
 		
 		// Product price label
-		String price = OSRUtilities.formatCurrency(product[3]);
-		if(!product[3].equals(product[4])){
-			price += "<br /><strike>" + OSRUtilities.formatCurrency(product[4]) 
-				  + "</strike>";
+		String price = OSRUtilities.formatCurrency(product.getPrecio() + "");
+		if(product.getPrecio() != product.getPriceBeforeDiscount()){
+			price += "<br /><strike>" + 
+					OSRUtilities.formatCurrency(product.getPriceBeforeDiscount() + "")
+					+ "</strike>";
 		}
 		productPrice = new Label(price, ContentMode.HTML);
 		
@@ -99,7 +101,7 @@ public class ShoppingCartProductSummary extends CustomComponent implements ViewC
 		mainLayout.addComponent(actionsLayout);
 	}
 	
-	public String[] getProduct(){
+	public ProductoDTO getProduct(){
 		return product;
 	}
 

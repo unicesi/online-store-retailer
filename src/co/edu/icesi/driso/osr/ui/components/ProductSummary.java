@@ -13,6 +13,7 @@ import co.edu.icesi.driso.osr.ui.Application;
 import co.edu.icesi.driso.osr.ui.views.ProductView;
 import co.edu.icesi.driso.osr.util.OSRException;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
+import co.edu.icesi.osr.dtos.ProductoDTO;
 
 import com.vaadin.data.Item;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -39,7 +40,7 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 
 	private static final long serialVersionUID = 1L;
 	private ProductPresenter presenter; 
-	private final String[] product;
+	private final ProductoDTO product;
 	
 	private CssLayout mainLayout;
 	private VerticalLayout informationLayout;
@@ -59,7 +60,7 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 	
 	private ValueChangeListener ratingListener;
 
-	public ProductSummary(String[] product, boolean completeSummary) {
+	public ProductSummary(ProductoDTO product, boolean completeSummary) {
 		this.product = product;
 		this.completeSummary = completeSummary;
 
@@ -118,33 +119,33 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 		linksLayout.setStyleName("v-component-group");
 
 		// Product's data: name, description, image
-		String[] productData = OSRUtilities.getProductInformation(Integer.parseInt(product[0]));
+		ProductoDTO _product = OSRUtilities.getDummyProduct(product.getProductoId());
 
 		// Product's image
 		FileResource imageFile = 
 				new FileResource(
 						new File(OSRUtilities.getRealPathFor("/WEB-INF/images/products/" 
-								+ productData[5])));
+								+ _product.getImageName())));
 		Image productImage = new Image(null, imageFile);
-		productImage.setAlternateText(productData[1]);
+		productImage.setAlternateText(_product.getNombre());
 		productImage.setWidth(calculatedProductImageWidth, Unit.PIXELS);
 
 		// Product's data
 		Label productName = 
-				new Label("<a href=\"#!" + ProductView.NAME + "/" + product[0] + 
-						"\"><h2>" + productData[1] + "</h2></a>", ContentMode.HTML);
+				new Label("<a href=\"#!" + ProductView.NAME + "/" + product.getProductoId() + 
+						"\"><h2>" + _product.getNombre() + "</h2></a>", ContentMode.HTML);
 		informationLayout.addComponent(productName);
 
 		Label productDescription = 
-				new Label("<p>" + productData[2] + "</p>", ContentMode.HTML);
+				new Label("<p>" + _product.getDescripcion() + "</p>", ContentMode.HTML);
 		informationLayout.addComponent(productDescription);
 		
-		String productPriceStr = "<p>Price: " + OSRUtilities.formatCurrency(productData[3]);
+		String productPriceStr = "<p>Price: " + OSRUtilities.formatCurrency(_product.getPrecio() + "");
 		
-		if(!productData[3].equals(productData[4])){
+		if(_product.getPrecio() != _product.getPriceBeforeDiscount()){
 			productPriceStr += "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 							+ "&nbsp;&nbsp;&nbsp;<strike>" 
-							+ OSRUtilities.formatCurrency(productData[4])
+							+ OSRUtilities.formatCurrency(_product.getPriceBeforeDiscount() + "")
 							+ "</strike></p>";
 		}else{
 			productPriceStr += "</p>";
@@ -280,7 +281,7 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 		return commentLayout;
 	}
 	
-	public String[] getProduct(){
+	public ProductoDTO getProduct(){
 		return product;
 	}
 
@@ -297,7 +298,7 @@ public class ProductSummary extends CustomComponent implements ViewComponent<Dou
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				Application.navigator.navigateTo(ProductView.NAME + "/" + product[0]);
+				Application.navigator.navigateTo(ProductView.NAME + "/" + product.getProductoId());
 			}
 		});
 		

@@ -1,11 +1,12 @@
 package co.edu.icesi.driso.osr.presenters;
 
 import co.edu.icesi.driso.osr.ui.components.SquaredProductSummary;
+import co.edu.icesi.osr.dtos.ProductoDTO;
 
 public class SquaredProductPresenter implements Presenter {
 	
 	public interface Collaborator {
-		public void onAddingToCart(String[] product, int quantity);
+		public void onAddingToCart(ProductoDTO product, int quantity);
 	}
 	
 	private final SquaredProductSummary viewComponent;
@@ -18,7 +19,7 @@ public class SquaredProductPresenter implements Presenter {
 		this.collaborators = collaborators;
 	}
 	
-	public void onAddingToCart(String[] product, int quantity) {
+	public void onAddingToCart(ProductoDTO product, int quantity) {
 		// TODO
 		// Perform the adding process
 		// ...

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import co.edu.icesi.osr.dtos.ProductoDTO;
+
 import com.vaadin.server.VaadinService;
 
 public class OSRUtilities {
@@ -80,24 +82,27 @@ public class OSRUtilities {
 		return item;
 	}
 	
-	public static String[] getProductInformation(int productId){
-		Random gen = new Random();
-		String v = gen.nextBoolean() ? "545000" : "599000";
-		return new String[]{
-/* 0 */			productId + "",
-/* 1 */			"Sony Xperia Z3", 
-/* 2 */			"It’s the details that make the difference " +
+	public static ProductoDTO getDummyProduct(int productId){
+		ProductoDTO p = new ProductoDTO();
+		p.setProductoId(productId);
+		p.setNombre("Sony Xperia Z3");
+		p.setDescripcion("It’s the details that make the difference " +
 				"between a good smartphone and a great one. " +
 				"Our premium Xperia™ smartphones and tablets " +
 				"bring together the best of Sony technologies, " +
 				"crafted using the finest quality materials in " +
 				"a waterproof body, for a design that can " +
 				"withstand the test of time. So don’t settle " +
-				"for good when you can have great.", 
-/* 3 */			"545000",
-/* 4 */			v,
-/* 5 */			"htc_one.png"
-		};
+				"for good when you can have great.");
+		p.setPrecio(545000);
+		p.setImageName("htc_one.png");
+		
+		Random gen = new Random();
+		double v = gen.nextBoolean() ? 545000 : 599000;
+		if(p.getPrecio() != v)
+			p.setDiscount(v);
+		
+		return p;
 	}
 
 }

@@ -4,6 +4,7 @@ import co.edu.icesi.driso.osr.ui.Application;
 import co.edu.icesi.driso.osr.ui.components.ShoppingCartProductSummary;
 import co.edu.icesi.driso.osr.ui.views.HomeView;
 import co.edu.icesi.driso.osr.ui.views.ShoppingCartView;
+import co.edu.icesi.osr.dtos.ProductoDTO;
 
 import com.google.gwt.dev.util.collect.HashMap;
 
@@ -34,7 +35,7 @@ public class ShoppingCartPresenter implements Presenter,
 	}
 
 	@Override
-	public void onQuantityChange(String[] product, int quantity){
+	public void onQuantityChange(ProductoDTO product, int quantity){
 		double newTotal = 0;
 		
 		for (ShoppingCartProductSummary tempProductSummary : products.keySet()) {
@@ -43,7 +44,7 @@ public class ShoppingCartPresenter implements Presenter,
 			}
 			
 			newTotal += 
-					Double.valueOf(tempProductSummary.getProduct()[3]) 
+					Double.valueOf(tempProductSummary.getProduct().getPrecio()) 
 					* products.get(tempProductSummary);
 		}
 				
@@ -56,7 +57,7 @@ public class ShoppingCartPresenter implements Presenter,
 	}
 	
 	@Override
-	public void onRemovingProduct(String[] product) {
+	public void onRemovingProduct(ProductoDTO product) {
 		double newTotal = 0;
 		boolean removed = false;
 		
@@ -66,7 +67,7 @@ public class ShoppingCartPresenter implements Presenter,
 				removed = true;
 			}else{
 				newTotal += 
-						Double.valueOf(tempProductSummary.getProduct()[3]) 
+						Double.valueOf(tempProductSummary.getProduct().getPrecio()) 
 						* products.get(tempProductSummary);
 			}
 		}
@@ -81,7 +82,7 @@ public class ShoppingCartPresenter implements Presenter,
 	}
 
 	@Override
-	public void onAddingToCart(String[] product, int quantity){
+	public void onAddingToCart(ProductoDTO product, int quantity){
 		
 		boolean added = false;
 
@@ -90,7 +91,7 @@ public class ShoppingCartPresenter implements Presenter,
 				int newQuantity = products.get(tempProductSummary) + quantity;
 				
 				products.put(tempProductSummary, newQuantity);
-				totalToPay += Double.valueOf(tempProductSummary.getProduct()[3]) * quantity;
+				totalToPay += Double.valueOf(tempProductSummary.getProduct().getPrecio()) * quantity;
 				
 				tempProductSummary.setData("quantity", newQuantity);
 				
@@ -106,7 +107,7 @@ public class ShoppingCartPresenter implements Presenter,
 			productPresenter.init();
 
 			products.put(productSummary, quantity);
-			totalToPay += Double.valueOf(product[3]) * quantity;
+			totalToPay += Double.valueOf(product.getPrecio()) * quantity;
 		}
 		
 		viewComponent.setData("products", products.keySet());

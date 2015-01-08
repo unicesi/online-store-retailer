@@ -7,6 +7,7 @@ import co.edu.icesi.driso.osr.presenters.SquaredProductPresenter;
 import co.edu.icesi.driso.osr.presenters.ViewComponent;
 import co.edu.icesi.driso.osr.ui.views.ProductView;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
+import co.edu.icesi.osr.dtos.ProductoDTO;
 
 import com.vaadin.data.util.converter.Converter.ConversionException;
 import com.vaadin.server.FileResource;
@@ -30,11 +31,11 @@ public class SquaredProductSummary extends CustomComponent implements
 
 	private VerticalLayout mainLayout;
 	private CssLayout buttonsGroup;
-	private final String[] product;
+	private final ProductoDTO product;
 	private TextField quantityField;
 	private Button addToCartButton;
 
-	public SquaredProductSummary(String[] product) {
+	public SquaredProductSummary(ProductoDTO product) {
 		this.product = product;
 		buildMainLayout();
 		bindEvents();
@@ -66,28 +67,28 @@ public class SquaredProductSummary extends CustomComponent implements
 		buttonsGroup.addComponent(addToCartButton);
 
 		Label productName = new Label("<h1><a href=\"#!" + ProductView.NAME
-				+ "/" + product[0] + "\">" + product[1] + "</a></h1>",
+				+ "/" + product.getProductoId() + "\">" + product.getNombre() + "</a></h1>",
 				ContentMode.HTML);
 
 		Label productPrice = new Label("<h3>"
-				+ OSRUtilities.formatCurrency(product[3]) + "</h3>",
+				+ OSRUtilities.formatCurrency(product.getPrecio() + "") + "</h3>",
 				ContentMode.HTML);
 
 		Label lastProductPrice = new Label(
 				"<span class=\"prev-price\"><strike>"
-						+ OSRUtilities.formatCurrency(product[4])
+						+ OSRUtilities.formatCurrency(product.getPriceBeforeDiscount() + "")
 						+ "</strike></span>", ContentMode.HTML);
 
 		FileResource imageResource = new FileResource(new File(
 				OSRUtilities.getRealPathFor("/WEB-INF/images/thumbnails/"
-						+ product[5])));
+						+ product.getImageName())));
 		Image productImage = new Image(null, imageResource);
 
 		mainLayout.addComponent(productImage);
 		mainLayout.addComponent(productName);
 		mainLayout.addComponent(productPrice);
 
-		if (!product[3].equals(product[4])) {
+		if (product.getPrecio() != product.getPriceBeforeDiscount()) {
 			productPrice.setStyleName("highlighted");
 		} else {
 			lastProductPrice = new Label(

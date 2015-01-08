@@ -63,7 +63,7 @@ public class FeaturedProducts extends CustomComponent {
 		
 		// Show top product
 		if(showTopProduct)
-			topProduct = new ProductSummary(OSRUtilities.getProductInformation(1), false);
+			topProduct = new ProductSummary(OSRUtilities.getDummyProduct(1), false);
 		
 		// Add a title in case the featured products correspond to related products
 		if(relatedProductId > -1){

@@ -38,7 +38,7 @@ public class ProductView extends VerticalLayout implements View {
 				productId = Integer.parseInt(vars[0]);
 				
 				Page.getCurrent()
-				.setTitle(OSRUtilities.getProductInformation(productId)[1] + " - Online Store Retailer");
+				.setTitle(OSRUtilities.getDummyProduct(productId).getNombre() + " - Online Store Retailer");
 				
 				// Build the UI and assign respective presenters
 				buildUI();
@@ -62,7 +62,7 @@ public class ProductView extends VerticalLayout implements View {
 	
 	public void buildUI(){
 
-		productSummary = new ProductSummary(OSRUtilities.getProductInformation(1), true);
+		productSummary = new ProductSummary(OSRUtilities.getDummyProduct(1), true);
 		
 		// Top-selling related-products showcase
 		relatedProducts = new FeaturedProducts(false, 1);
