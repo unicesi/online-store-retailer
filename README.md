@@ -7,6 +7,6 @@ The Online Store Retailer (OSR) is one of the cases of study of the [SHIFT proje
 + [Home](#)
 	- [Importing the Vaadin project in the Eclipse IDE](https://github.com/unicesi/online-store-retailer/wiki/Importing-the-Vaadin-project-in-the-Eclipse-IDE)
 
-### Working demo at Openshift
+#### Working demo at Openshift
 
 You can visit the OSR demo at [http://jbosseap-mjimenez.rhcloud.com/](http://jbosseap-mjimenez.rhcloud.com/). You are free to comment or suggest on this repository's content.
