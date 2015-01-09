@@ -2,15 +2,15 @@ package co.edu.icesi.driso.osr.ui;
 
 
 import co.edu.icesi.driso.osr.presenters.ShoppingCartPresenter;
-import co.edu.icesi.driso.osr.ui.views.CategoryView;
 import co.edu.icesi.driso.osr.ui.views.ErrorView;
-import co.edu.icesi.driso.osr.ui.views.HomeView;
-import co.edu.icesi.driso.osr.ui.views.ProductView;
-import co.edu.icesi.driso.osr.ui.views.RecoveryPasswordView;
-import co.edu.icesi.driso.osr.ui.views.SearchResultsView;
-import co.edu.icesi.driso.osr.ui.views.ShoppingCartView;
-import co.edu.icesi.driso.osr.ui.views.SignUpView;
-import co.edu.icesi.driso.osr.ui.views.TermsAndConditionsView;
+import co.edu.icesi.driso.osr.ui.views.client.CategoryView;
+import co.edu.icesi.driso.osr.ui.views.client.HomeView;
+import co.edu.icesi.driso.osr.ui.views.client.ProductView;
+import co.edu.icesi.driso.osr.ui.views.client.RecoveryPasswordView;
+import co.edu.icesi.driso.osr.ui.views.client.SearchResultsView;
+import co.edu.icesi.driso.osr.ui.views.client.ShoppingCartView;
+import co.edu.icesi.driso.osr.ui.views.client.SignUpView;
+import co.edu.icesi.driso.osr.ui.views.client.TermsAndConditionsView;
 
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;

@@ -5,7 +5,7 @@ import java.util.List;
 
 import co.edu.icesi.driso.osr.ui.Application;
 import co.edu.icesi.driso.osr.ui.components.SearchBar;
-import co.edu.icesi.driso.osr.ui.views.SearchResultsView;
+import co.edu.icesi.driso.osr.ui.views.client.SearchResultsView;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
 
 

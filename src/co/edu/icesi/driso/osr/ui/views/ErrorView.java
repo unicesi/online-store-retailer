@@ -1,5 +1,7 @@
 package co.edu.icesi.driso.osr.ui.views;
 
+import co.edu.icesi.driso.osr.ui.views.client.ViewWrapper;
+
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;

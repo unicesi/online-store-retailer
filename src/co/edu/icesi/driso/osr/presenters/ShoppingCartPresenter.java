@@ -2,8 +2,8 @@ package co.edu.icesi.driso.osr.presenters;
 
 import co.edu.icesi.driso.osr.ui.Application;
 import co.edu.icesi.driso.osr.ui.components.ShoppingCartProductSummary;
-import co.edu.icesi.driso.osr.ui.views.HomeView;
-import co.edu.icesi.driso.osr.ui.views.ShoppingCartView;
+import co.edu.icesi.driso.osr.ui.views.client.HomeView;
+import co.edu.icesi.driso.osr.ui.views.client.ShoppingCartView;
 import co.edu.icesi.osr.dtos.ProductoDTO;
 
 import com.google.gwt.dev.util.collect.HashMap;

@@ -4,9 +4,9 @@ import co.edu.icesi.driso.osr.presenters.SearchPresenter;
 import co.edu.icesi.driso.osr.presenters.ShoppingCartPresenter;
 import co.edu.icesi.driso.osr.presenters.SignInPresenter;
 import co.edu.icesi.driso.osr.ui.Application;
-import co.edu.icesi.driso.osr.ui.views.HomeView;
-import co.edu.icesi.driso.osr.ui.views.ShoppingCartView;
-import co.edu.icesi.driso.osr.ui.views.SignUpView;
+import co.edu.icesi.driso.osr.ui.views.client.HomeView;
+import co.edu.icesi.driso.osr.ui.views.client.ShoppingCartView;
+import co.edu.icesi.driso.osr.ui.views.client.SignUpView;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
 
 import com.vaadin.server.ExternalResource;

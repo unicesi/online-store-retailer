@@ -1,4 +1,4 @@
-package co.edu.icesi.driso.osr.ui.views;
+package co.edu.icesi.driso.osr.ui.views.client;
 
 import java.util.ArrayList;
 import java.util.List;

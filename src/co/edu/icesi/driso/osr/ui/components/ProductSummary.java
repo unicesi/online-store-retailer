@@ -10,7 +10,7 @@ import co.edu.icesi.driso.osr.presenters.Presenter;
 import co.edu.icesi.driso.osr.presenters.ProductPresenter;
 import co.edu.icesi.driso.osr.presenters.ViewComponent;
 import co.edu.icesi.driso.osr.ui.Application;
-import co.edu.icesi.driso.osr.ui.views.ProductView;
+import co.edu.icesi.driso.osr.ui.views.client.ProductView;
 import co.edu.icesi.driso.osr.util.OSRException;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
 import co.edu.icesi.osr.dtos.ProductoDTO;

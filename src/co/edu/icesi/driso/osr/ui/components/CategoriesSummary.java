@@ -2,8 +2,7 @@ package co.edu.icesi.driso.osr.ui.components;
 
 import java.io.File;
 
-
-import co.edu.icesi.driso.osr.ui.views.CategoryView;
+import co.edu.icesi.driso.osr.ui.views.client.CategoryView;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
 
 import com.vaadin.server.ExternalResource;

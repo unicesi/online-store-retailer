@@ -4,7 +4,7 @@ package co.edu.icesi.driso.osr.ui.components;
 import co.edu.icesi.driso.osr.presenters.Presenter;
 import co.edu.icesi.driso.osr.presenters.SubscriptionPresenter;
 import co.edu.icesi.driso.osr.presenters.ViewComponent;
-import co.edu.icesi.driso.osr.ui.views.TermsAndConditionsView;
+import co.edu.icesi.driso.osr.ui.views.client.TermsAndConditionsView;
 import co.edu.icesi.driso.osr.util.RequiredCheckboxValidator;
 
 import com.vaadin.data.Validator.InvalidValueException;

@@ -4,9 +4,8 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
 
-
 import co.edu.icesi.driso.osr.ui.Application;
-import co.edu.icesi.driso.osr.ui.views.CategoryView;
+import co.edu.icesi.driso.osr.ui.views.client.CategoryView;
 
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
@@ -15,7 +14,7 @@ public class MenuUtilities {
 
 	public static final String taxonomyFilePath = "/WEB-INF/GoodRelations/taxonomy.en-US.txt";
 
-	public static void addAllMenuItems(MenuBar menu){
+	public static void addCategoriesToMenu(MenuBar menu){
 
 		Hashtable<String, MenuItem> categories = new Hashtable<String, MenuItem>();
 		List<String> taxonomy;
@@ -28,7 +27,7 @@ public class MenuUtilities {
 
 				if(lineItems.length == 1){
 					String newName = OSRUtilities.removeInitialEndingSpaces(lineItems[0]);
-					MenuItem newCategory = menu.addItem(newName, null, getMenuItemCommand(1));
+					MenuItem newCategory = menu.addItem(newName, null, getMenuItemCommandForCategory(1));
 
 					categories.put(newName, newCategory);
 				}else{
@@ -36,7 +35,7 @@ public class MenuUtilities {
 					String penultimateName = OSRUtilities.removeInitialEndingSpaces(lineItems[lineItems.length - 2]);
 
 					MenuItem parent = categories.get(penultimateName);
-					MenuItem newCategory = parent.addItem(lastItemName, null, getMenuItemCommand(1));
+					MenuItem newCategory = parent.addItem(lastItemName, null, getMenuItemCommandForCategory(1));
 
 					categories.put(lastItemName, newCategory);
 				}
@@ -47,7 +46,7 @@ public class MenuUtilities {
 		}
 	}
 
-	private static MenuBar.Command getMenuItemCommand(final int categoryId){
+	private static MenuBar.Command getMenuItemCommandForCategory(final int categoryId){
 		MenuBar.Command command = new MenuBar.Command() {
 			private static final long serialVersionUID = 1L;
 
@@ -58,6 +57,10 @@ public class MenuUtilities {
 		};
 
 		return command;
+	}
+	
+	public static void addAdminLinksToMenu(MenuBar menu){
+		
 	}
 
 }

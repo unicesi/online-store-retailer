@@ -1,4 +1,4 @@
-package co.edu.icesi.driso.osr.ui.views;
+package co.edu.icesi.driso.osr.ui.views.client;
 
 import co.edu.icesi.driso.osr.presenters.ProductPresenter;
 import co.edu.icesi.driso.osr.ui.Application;

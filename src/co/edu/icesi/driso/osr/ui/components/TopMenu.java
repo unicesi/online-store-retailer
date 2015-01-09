@@ -2,8 +2,7 @@ package co.edu.icesi.driso.osr.ui.components;
 
 
 import co.edu.icesi.driso.osr.ui.Application;
-import co.edu.icesi.driso.osr.ui.views.HomeView;
-import co.edu.icesi.driso.osr.util.MenuUtilities;
+import co.edu.icesi.driso.osr.ui.views.client.HomeView;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.CustomComponent;
@@ -45,9 +44,11 @@ public class TopMenu extends CustomComponent {
 		
 		homeMenuItem.setStyleName("v-menubar-menuitem-icon-only");
 		
-		MenuUtilities.addAllMenuItems(menu);
-		
 		return mainLayout;
+	}
+	
+	public MenuBar getMenu(){
+		return menu;
 	}
 
 }

@@ -3,7 +3,7 @@ package co.edu.icesi.driso.osr.ui.components;
 
 import co.edu.icesi.driso.osr.presenters.SubscriptionPresenter;
 import co.edu.icesi.driso.osr.ui.Application;
-import co.edu.icesi.driso.osr.ui.views.HomeView;
+import co.edu.icesi.driso.osr.ui.views.client.HomeView;
 
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FontAwesome;

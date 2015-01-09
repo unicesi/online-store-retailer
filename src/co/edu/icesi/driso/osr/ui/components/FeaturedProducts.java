@@ -4,7 +4,7 @@ import java.io.File;
 
 import co.edu.icesi.driso.osr.presenters.ProductPresenter;
 import co.edu.icesi.driso.osr.ui.Application;
-import co.edu.icesi.driso.osr.ui.views.ProductView;
+import co.edu.icesi.driso.osr.ui.views.client.ProductView;
 import co.edu.icesi.driso.osr.util.OSRUtilities;
 
 import com.vaadin.server.ExternalResource;

@@ -3,7 +3,7 @@ package co.edu.icesi.driso.osr.ui.components;
 import co.edu.icesi.driso.osr.presenters.SignInPresenter;
 import co.edu.icesi.driso.osr.presenters.Presenter;
 import co.edu.icesi.driso.osr.presenters.ViewComponent;
-import co.edu.icesi.driso.osr.ui.views.RecoveryPasswordView;
+import co.edu.icesi.driso.osr.ui.views.client.RecoveryPasswordView;
 
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.validator.EmailValidator;

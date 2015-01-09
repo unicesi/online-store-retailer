@@ -5,7 +5,7 @@ import co.edu.icesi.driso.osr.presenters.Presenter;
 import co.edu.icesi.driso.osr.presenters.SignUpPresenter;
 import co.edu.icesi.driso.osr.presenters.ViewComponent;
 import co.edu.icesi.driso.osr.ui.Application;
-import co.edu.icesi.driso.osr.ui.views.HomeView;
+import co.edu.icesi.driso.osr.ui.views.client.HomeView;
 import co.edu.icesi.driso.osr.util.OSRException;
 import co.edu.icesi.driso.osr.util.PasswordConfirmationValidator;
 
