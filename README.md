@@ -1,7 +1,7 @@
 The Online Store Retailer v3
 ============================
 
-This repository is part of the [SHIFT project](http://www.icesi.edu.co/i2t/driso/projects/).
+This repository is part of the [SHIFT project](http://www.icesi.edu.co/i2t/driso/shift/).
 
 ## Wiki
 + [Home](#)
